@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <Nav class="mb-6" />
-    <HelloWorld/>
+    <Nav />
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import Nav from './components/Nav.vue';
-
+import Nav from '@/components/Nav'
 export default {
-  name: 'App',
   components: {
-    HelloWorld,
     Nav
   }
 }
 </script>
+
+<style>
+
+</style>
