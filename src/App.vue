@@ -1,15 +1,18 @@
 <template>
-  <div id="app">
+  <div id="app" class="flex flex-col min-h-screen bg-indigo-100">
     <Nav />
-    <router-view/>
+    <router-view class="flex-grow"/>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 export default {
   components: {
-    Nav
+    Nav,
+    Footer
   }
 }
 </script>
