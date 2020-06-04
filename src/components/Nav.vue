@@ -32,9 +32,9 @@
       class="px-2 pt-2 text-center text-sm text-gray-600 items-center pb-4 sm:flex sm:p-0"
       id="nav"
     >
-      <router-link class="mx-2 block mt-4 sm:mt-0" to="/">Home</router-link>
-      <router-link class="mx-2 block mt-4 sm:mt-0" to="/global">Global</router-link>
-      <router-link class="mx-2 block mt-4 sm:mt-0" to="/id">Local</router-link>
+      <router-link class="mx-2 block mt-4 sm:mt-0 focus:outline-none" to="/">Home</router-link>
+      <router-link class="mx-2 block mt-4 sm:mt-0 focus:outline-none" to="/global">Global</router-link>
+      <router-link class="mx-2 block mt-4 sm:mt-0 focus:outline-none" to="/id">Local</router-link>
     </nav>
   </header>
 </template>
