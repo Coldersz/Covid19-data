@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="flex flex-col min-h-screen bg-indigo-100">
+  <div id="app" class="flex flex-col min-h-screen bg-white">
     <Nav />
     <router-view class="flex-grow"/>
     <Footer />
