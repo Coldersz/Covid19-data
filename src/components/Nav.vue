@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white sm:py-6 shadow-lg sm:flex w-full sm:px-4 relative">
+  <header class="bg-white shadow-lg sm:flex w-full sm:px-4 relative">
     <div class="flex items-center px-4 py-6 justify-between sm:p-0">
       <div class="flex items-center flex-shrink-0 mr-10">
         <img src="@/assets/logo.png" alt="logo" width="40" class="pr-1" />
@@ -32,9 +32,15 @@
       class="px-2 pt-2 text-center text-sm text-gray-600 items-center pb-4 sm:flex sm:p-0"
       id="nav"
     >
-      <router-link class="mx-2 block mt-4 sm:mt-0 focus:outline-none" to="/">Home</router-link>
-      <router-link class="mx-2 block mt-4 sm:mt-0 focus:outline-none" to="/global">Global</router-link>
-      <router-link class="mx-2 block mt-4 sm:mt-0 focus:outline-none" to="/id">Local</router-link>
+      <div class="hover:bg-purple-100">
+        <router-link class="px-3 sm:w-16 block mt-4 sm:mt-0 focus:outline-none sm:py-6" to="/">Home</router-link>
+      </div>
+      <div class="hover:bg-purple-100">
+        <router-link class="px-3 sm:w-16 block mt-4 sm:mt-0 focus:outline-none sm:py-6" to="/global">Global</router-link>
+      </div>
+      <div class="hover:bg-purple-100">
+        <router-link class="px-3 sm:w-16 block mt-4 sm:mt-0 focus:outline-none sm:py-6" to="/id">Local</router-link>
+      </div>
     </nav>
   </header>
 </template>
