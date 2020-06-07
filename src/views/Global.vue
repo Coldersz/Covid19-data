@@ -1,10 +1,10 @@
 <template>
-  <div class="container mx-auto py-10 w-11/12">
+  <div class="container mx-auto py-10 w-11/12" v-show="loaded">
     <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl">
       <div class="py-5 font-light text-5xl text-center ">
         Jumlah Kasus Covid-19 di Dunia
       </div>
-      <div class="py-6 px-3 grid grid-cols-3 gap-4 text-3xl">
+      <div class="py-6 px-5 grid grid-cols-3 gap-3 text-3xl">
         <div class="text-center py-3 w-full rounded-md mx-auto shadow-lg bg-white hover:bg-gray-800 sm:col-span-1 col-span-3 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl gray">
           <div class="gray-mute-font text-gray-600 text-xl transform transition duration-500">Positif</div>
           <div class="text-5xl text-gray-900 gray-font font-semibold transform transition duration-500">{{confirmed}}</div>
@@ -19,21 +19,65 @@
         </div>
       </div>
     </div>
+
+    <div class="mx-auto pb-5 mt-12 m-6 bg-indigo-100 rounded-lg lg:max-w-5xl">
+      <div class="px-3">
+      <div class="py-5 font-light text-5xl text-center ">
+        Statistik Covid-19 di Dunia
+      </div>
+      <Chart :chartdata="chartdata" :options="options" v-if="loaded" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Chart from '@/components/Chart';
 
 export default {
+  components: {
+    Chart
+  },
   data() {
     return {
       confirmed: '',
       recovered: '',
-      deaths: ''
+      deaths: '',
+      loaded: false,
+      chartdata: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Positif',
+            borderColor: 'red',
+            pointBackgroundColor: 'red',
+            pointHoverRadius: 6,
+            pointRadius: 1,
+            backgroundColor: 'transparent',
+            data: []
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          position: 'bottom',
+          text: 'Grafik Jumlah Pasien Positif Covid-19'
+        }
+      }
     };
   },
   async created() {
     await this.fetchGlobal();
+  },
+  async mounted() {
+    this.loaded = false;
+    await this.fetchChart();
   },
   methods: {
     async fetchGlobal() {
@@ -47,6 +91,21 @@ export default {
         this.deaths = this.format(response.data.deaths.value);
       }
       catch(error) {
+        console.error(error);
+      }
+    },
+    async fetchChart() {
+      try {
+        const response = await this.$global({
+          method: 'GET',
+          url: '/daily/'
+        })
+        for (let i = 0; i < response.data.length; i++) {
+          this.chartdata.datasets[0].data[i] = response.data[i].totalConfirmed;
+          this.chartdata.labels[i] = response.data[i].reportDate;
+        }
+        this.loaded = true;
+      }catch(error) {
         console.error(error);
       }
     },

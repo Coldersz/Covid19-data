@@ -10,9 +10,11 @@
   "dependencies": {
     "autoprefixer": "^9.8.0",
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
     "tailwindcss": "^1.4.6",
     "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
     "vue-router": "^3.3.2",
     "vue-tailwind": "^0.4.6"
   },
