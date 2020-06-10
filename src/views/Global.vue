@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto py-10 w-11/12" v-show="loaded">
+  <div class="mx-auto py-10 w-11/12" v-show="loaded">
     <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl">
       <div class="py-5 font-light text-5xl text-center ">
         Jumlah Kasus Covid-19 di Dunia
