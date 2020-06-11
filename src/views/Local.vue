@@ -1,8 +1,9 @@
 <template>
   <div class="mx-auto py-10 w-11/12">
-    <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl">
+    <s-data v-if="waitData" />
+    <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl" v-else>
       <div class="py-5 font-light text-5xl text-center">Jumlah Kasus Covid-19 di Indonesia</div>
-      <div class="py-6 px-3 grid grid-cols-3 gap-4 text-3xl">
+      <div class="py-6 px-5 grid grid-cols-3 gap-3 text-3xl">
         <div
           class="text-center py-3 w-full rounded-md mx-auto shadow-lg bg-white hover:bg-gray-800 sm:col-span-1 col-span-3 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl gray"
         >
@@ -35,8 +36,9 @@
         </div>
       </div>
     </div>
-    
-    <div class="mx-auto m-6 px-5 pt-5 lg:max-w-5xl">
+
+    <s-table v-if="waitTable" />
+    <div class="mx-auto m-6 px-5 pt-8 lg:max-w-5xl" v-else>
       <div class="py-5 font-light text-5xl text-center">Daftar Kasus Covid-19 berdasarkan provinsi</div>
       <b-table
         :data="dataTable"
@@ -53,7 +55,6 @@
         aria-previous-label="Previous page"
         aria-page-label="Page"
         aria-current-label="Current page"
-        v-if="wait"
       >
         <template slot-scope="props">
           <template v-for="column in columns">
@@ -79,11 +80,19 @@
 </template>
 
 <script>
+import SData from '@/components/SkeletonData';
+import STable from '@/components/SkeletonTable';
+
 export default {
+  components: {
+    's-data': SData,
+    's-table': STable
+  },
   data() {
     return {
       confirmed: "",
-      wait: false,
+      waitData: true,
+      waitTable: true,
       recovered: "",
       deaths: "",
       dataTable: [],
@@ -97,19 +106,19 @@ export default {
         {
           field: "Provinsi",
           label: "Nama Provinsi",
-          searchable: true,
+          searchable: true
         },
         {
           field: "Kasus_Posi",
-          label: "Positif",
+          label: "Positif"
         },
         {
           field: "Kasus_Semb",
-          label: "Sembuh",
+          label: "Sembuh"
         },
         {
           field: "Kasus_Meni",
-          label: "Meninggal",
+          label: "Meninggal"
         }
       ],
       isPaginated: true,
@@ -142,6 +151,8 @@ export default {
         this.deaths = response.data[0].meninggal;
       } catch (error) {
         console.error(error);
+      } finally {
+        this.waitData = false;
       }
     },
     async fetchDistrict() {
@@ -157,9 +168,11 @@ export default {
         for (let i = 0; i < response.data.length; i++) {
           this.dataTable[i] = response.data[i].attributes;
         }
-        this.wait = true;
+        this.waitTable = true;
       } catch (error) {
         console.error(error);
+      } finally {
+        this.waitTable = false;
       }
     }
   }
