@@ -1,6 +1,7 @@
 <template>
-  <div class="mx-auto py-10 w-11/12" v-show="loaded">
-    <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl">
+  <div class="mx-auto py-10 w-11/12">
+    <s-data v-if="!loaded" />
+    <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl" v-else>
       <div class="py-5 font-light text-5xl text-center">Jumlah Kasus Covid-19 di Dunia</div>
       <div class="py-6 px-5 grid grid-cols-3 gap-3 text-3xl">
         <div
@@ -47,10 +48,12 @@
 
 <script>
 import Chart from "@/components/Chart";
+import SData from "@/components/SkeletonData";
 
 export default {
   components: {
-    Chart
+    Chart,
+    's-data': SData
   },
   data() {
     return {
