@@ -65,9 +65,9 @@ export default {
         labels: [],
         datasets: [
           {
-            label: "Positif",
+            label: "Peningkatan Pasien Positif",
             borderColor: "red",
-            pointBackgroundColor: "red",
+            pointBackgroundColor: "black",
             pointHoverRadius: 6,
             pointRadius: 1,
             backgroundColor: "transparent",
@@ -84,7 +84,7 @@ export default {
         title: {
           display: true,
           position: "bottom",
-          text: "Grafik Jumlah Pasien Positif Covid-19"
+          text: "Grafik Peningkatan Pasien Positif Covid-19 Perhari"
         }
       }
     };
@@ -117,7 +117,7 @@ export default {
           url: "/daily/"
         });
         for (let i = 0; i < response.data.length; i++) {
-          this.chartdata.datasets[0].data[i] = response.data[i].totalConfirmed;
+          this.chartdata.datasets[0].data[i] = response.data[i].deltaConfirmed;
           this.chartdata.labels[i] = response.data[i].reportDate;
         }
         this.loaded = true;
