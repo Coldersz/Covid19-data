@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto py-10 w-11/12">
-    <s-data v-if="!loaded" />
+    <s-data v-if="!loadData" />
     <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl" v-else>
       <div class="py-5 font-light text-5xl text-center">Jumlah Kasus Covid-19 di Dunia</div>
       <div class="py-6 px-5 grid grid-cols-3 gap-3 text-3xl">
@@ -37,10 +37,11 @@
       </div>
     </div>
 
-    <div class="mx-auto pb-5 mt-12 m-6 bg-indigo-100 rounded-lg lg:max-w-5xl">
+    <s-chart v-if="!loadChart" />
+    <div class="mx-auto pb-5 mt-12 m-6 bg-indigo-100 rounded-lg lg:max-w-5xl" v-else>
       <div class="px-3">
         <div class="py-5 font-light text-5xl text-center">Statistik Covid-19 di Dunia</div>
-        <Chart :chartdata="chartdata" :options="options" v-if="loaded" />
+        <Chart :chartdata="chartdata" :options="options" />
       </div>
     </div>
   </div>
@@ -49,18 +50,21 @@
 <script>
 import Chart from "@/components/Chart";
 import SData from "@/components/SkeletonData";
+import SChart from "@/components/SkeletonChart";
 
 export default {
   components: {
     Chart,
-    's-data': SData
+    's-data': SData,
+    's-chart': SChart
   },
   data() {
     return {
       confirmed: "",
       recovered: "",
       deaths: "",
-      loaded: false,
+      loadChart: false,
+      loadData: false,
       chartdata: {
         labels: [],
         datasets: [
@@ -93,7 +97,8 @@ export default {
     await this.fetchGlobal();
   },
   async mounted() {
-    this.loaded = false;
+    this.loadData = false;
+    this.loadChart = false;
     await this.fetchChart();
   },
   methods: {
@@ -108,6 +113,8 @@ export default {
         this.deaths = this.format(response.data.deaths.value);
       } catch (error) {
         console.error(error);
+      } finally {
+        this.loadData = true;
       }
     },
     async fetchChart() {
@@ -120,9 +127,10 @@ export default {
           this.chartdata.datasets[0].data[i] = response.data[i].deltaConfirmed;
           this.chartdata.labels[i] = response.data[i].reportDate;
         }
-        this.loaded = true;
       } catch (error) {
         console.error(error);
+      } finally {
+        this.loadChart = true;
       }
     },
     format(param) {
