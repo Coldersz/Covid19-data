@@ -8,22 +8,13 @@
       </div>
       <div class="sm:hidden">
         <button
-          @click="isOpen = !isOpen"
+          @click="check()"
           type="button"
           class="block text-gray-500 focus:outline-none hover:bg-gray-200"
         >
-          <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-            <path
-              v-if="isOpen"
-              fill-rule="evenodd"
-              d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
-            />
-            <path
-              v-if="!isOpen"
-              fill-rule="evenodd"
-              d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-            />
-          </svg>
+        <div class="nav-icon outline-none">
+          <div></div>
+        </div>
         </button>
       </div>
     </div>
@@ -50,8 +41,22 @@ export default {
   name: "Nav",
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      docState: 'saved',
+      on: false,
+      cobalah: 'yes'
     };
+  },
+  methods: {
+    check() {
+      this.isOpen = !this.isOpen;
+      let nav = document.querySelector('.nav-icon');
+      if (nav.classList.contains('open')) {
+        nav.classList.remove('open');
+      } else {
+        nav.classList.add('open');
+      }
+    }
   }
 };
 </script>
@@ -63,4 +68,45 @@ export default {
   @apply text-black;
   @apply font-semibold;
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.nav-icon {
+  margin: .5em;
+  width: 36px;
+}
+
+.nav-icon:after, 
+.nav-icon:before, 
+.nav-icon div {
+  background-color: #aaa;
+  border-radius: 3px;
+  content: '';
+  display: block;
+  height: 4px;
+  margin: 8px 0;
+  transition: all .2s ease-in-out;
+  outline: 0;
+}
+
+.nav-icon.open:before {
+  transform: translateY(12px) rotate(135deg);
+  outline: 0;
+}
+
+.nav-icon.open:after {
+  transform: translateY(-12px) rotate(-135deg);
+  outline: 0;
+}
+
+.nav-icon.open div {
+  transform: scale(0);
+  outline: 0;
+}
+
 </style>
