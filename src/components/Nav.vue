@@ -30,7 +30,7 @@
         <router-link class="px-3 sm:w-16 block mt-4 sm:mt-0 focus:outline-none sm:py-6" to="/global">Global</router-link>
       </div>
       <div class="hover:bg-purple-100">
-        <router-link class="px-3 sm:w-16 block mt-4 sm:mt-0 focus:outline-none sm:py-6" to="/id">Local</router-link>
+        <router-link class="px-3 sm:w-16 block mt-4 sm:mt-0 focus:outline-none sm:py-6" to="/lokal">Lokal</router-link>
       </div>
     </nav>
   </header>
@@ -41,10 +41,7 @@ export default {
   name: "Nav",
   data() {
     return {
-      isOpen: false,
-      docState: 'saved',
-      on: false,
-      cobalah: 'yes'
+      isOpen: false
     };
   },
   methods: {
