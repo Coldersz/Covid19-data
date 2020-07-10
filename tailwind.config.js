@@ -4,8 +4,14 @@ module.exports = {
     './src/**/*.vue',
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        120: '28rem'
+      }
+    },
   },
-  variants: {},
+  variants: {
+    height: ['responsive']
+  },
   plugins: [],
 }
