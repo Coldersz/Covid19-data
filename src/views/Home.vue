@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto pt-16">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>

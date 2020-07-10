@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white shadow-lg sm:flex w-full sm:px-4 relative">
+  <header class="bg-white sm:flex flex-wrap w-full sm:px-4 fixed transition-all duration-500 transform" id="header">
     <div class="flex items-center px-4 py-6 justify-between sm:p-0">
       <div class="flex items-center flex-shrink-0 mr-10">
         <img src="@/assets/logo.png" alt="logo" width="40" class="pr-1" />
@@ -44,6 +44,7 @@ export default {
       isOpen: false
     };
   },
+  
   methods: {
     check() {
       this.isOpen = !this.isOpen;
@@ -53,13 +54,36 @@ export default {
       } else {
         nav.classList.add('open');
       }
+    },
+    handleScroll() {
+      let header = document.querySelector('#header');
+      if (window.scrollY > 0) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
     }
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 };
 </script>
 
 <style scoped>
 @tailwind base;
+
+header {
+  z-index: 10;
+}
+
+.scrolled {
+  @apply shadow-xl;
+  border-bottom: 0px
+}
 
 #nav a.router-link-exact-active {
   @apply text-black;

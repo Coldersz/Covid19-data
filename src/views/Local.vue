@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto py-10 w-11/12">
+  <div class="mx-auto pt-16 pb-10 w-11/12">
     <s-data v-if="waitData" />
     <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl" v-else>
       <div class="py-5 font-light text-5xl text-center">Jumlah Kasus Covid-19 di Indonesia</div>
