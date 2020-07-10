@@ -10,9 +10,9 @@
         <button
           @click="check()"
           type="button"
-          class="block text-gray-500 focus:outline-none hover:bg-gray-200"
+          class="block text-gray-500 focus:outline-none"
         >
-        <div class="nav-icon outline-none">
+        <div class="nav-icon focus:outline-none">
           <div></div>
         </div>
         </button>
