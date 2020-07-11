@@ -1,11 +1,11 @@
 <template>
-  <div class="mx-auto pt-16 pb-10 w-11/12">
+  <div class="mx-auto pt-20 pb-10 w-11/12">
     <s-data v-if="waitData" />
     <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl" v-else>
       <div class="py-5 font-light text-5xl text-center">Jumlah Kasus Covid-19 di Indonesia</div>
       <div class="py-6 px-5 grid grid-cols-3 gap-3 text-3xl">
         <div
-          class="text-center py-3 w-full rounded-md mx-auto shadow-lg bg-white hover:bg-gray-800 sm:col-span-1 col-span-3 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl gray"
+          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white hover:bg-gray-800 sm:col-span-1 col-span-3 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl gray"
         >
           <div
             class="gray-mute-font text-gray-600 text-xl transform transition duration-500"
@@ -15,7 +15,7 @@
           >{{confirmed}}</div>
         </div>
         <div
-          class="text-center py-3 w-full rounded-md mx-auto shadow-lg bg-white green col-span-3 sm:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl"
+          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white green col-span-3 sm:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl"
         >
           <div
             class="text-gray-600 green-mute-font transform transition duration-500 text-xl"
@@ -25,7 +25,7 @@
           >{{recovered}}</div>
         </div>
         <div
-          class="text-center py-3 w-full rounded-md mx-auto shadow-lg bg-white red col-span-3 sm:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl"
+          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white red col-span-3 sm:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl"
         >
           <div
             class="text-gray-600 red-mute-font transform transition duration-500 text-xl"
