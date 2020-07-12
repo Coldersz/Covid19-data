@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl">
-      <div class="content hidden sm:block mx-auto">
+      <div class="content sm:block mx-auto">
         <p>
           <center>
             <div class="px-5">
