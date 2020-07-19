@@ -2,36 +2,36 @@
   <div class="mx-auto pt-20 pb-10 w-11/12">
     <s-data v-if="waitData" />
     <div class="mx-auto m-6 bg-indigo-100 rounded-lg lg:max-w-5xl" v-else>
-      <div class="py-5 font-light text-5xl text-center">Jumlah Kasus Covid-19 di Indonesia</div>
-      <div class="py-6 px-5 grid grid-cols-3 gap-3 text-3xl">
+      <div class="py-5 text-4xl font-bold text-gray-700 text-center">Jumlah Kasus Covid-19 di Indonesia</div>
+      <div class="py-6 px-5 grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 gap-3 text-3xl">
         <div
-          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white hover:bg-gray-800 sm:col-span-1 col-span-3 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl gray"
+          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white hover:bg-gray-800 col-span-3 sm:col-span-6 lg:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl gray"
         >
           <div
             class="gray-mute-font text-gray-600 text-xl transform transition duration-500"
           >Positif</div>
           <div
-            class="text-5xl text-gray-900 gray-font font-semibold transform transition duration-500"
+            class="text-5xl text-gray-900 gray-font font-semibold transform transition duration-500 font-source"
           >{{confirmed}}</div>
         </div>
         <div
-          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white green col-span-3 sm:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl"
+          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white green col-span-3 lg:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl"
         >
           <div
             class="text-gray-600 green-mute-font transform transition duration-500 text-xl"
           >Sembuh</div>
           <div
-            class="text-5xl text-green-600 green-font font-semibold transform transition duration-500"
+            class="text-5xl text-green-600 green-font font-semibold transform transition duration-500 font-source"
           >{{recovered}}</div>
         </div>
         <div
-          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white red col-span-3 sm:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl"
+          class="text-center py-3 w-full rounded-md mx-auto my-1 shadow-lg bg-white red col-span-3 lg:col-span-1 transition duration-500 ease-in-out transform hover:-translate-y-3 hover:shadow-2xl"
         >
           <div
             class="text-gray-600 red-mute-font transform transition duration-500 text-xl"
           >Meninggal</div>
           <div
-            class="text-5xl text-red-600 red-font transform transition duration-500 font-semibold"
+            class="text-5xl text-red-600 red-font transform transition duration-500 font-semibold font-source"
           >{{deaths}}</div>
         </div>
       </div>
@@ -39,7 +39,7 @@
 
     <s-table v-if="waitTable" />
     <div class="mx-auto m-6 px-5 pt-8 lg:max-w-5xl" v-else>
-      <div class="py-5 font-light text-5xl text-center">Daftar Kasus Covid-19 berdasarkan provinsi</div>
+      <div class="py-5 text-4xl font-bold text-center">Daftar Kasus Covid-19 berdasarkan provinsi</div>
       <b-table
         :data="dataTable"
         :paginated="isPaginated"
@@ -180,6 +180,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.font-source {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 .gray:hover {
   .gray-font {
     color: white;
