@@ -5,6 +5,7 @@ import router from './router'
 import Api from './services/api';
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
+import './registerServiceWorker'
 
 Vue.use(Api);
 Vue.use(Buefy);
