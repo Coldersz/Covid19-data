@@ -122,7 +122,7 @@ export default {
       try {
         const response = await this.$global({
           method: "GET",
-          url: "/daily/"
+          url: "/daily"
         });
         for (let i = 0; i < response.data.length; i++) {
           this.chartdata.datasets[0].data[i] = response.data[i].deltaConfirmed;
