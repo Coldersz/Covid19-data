@@ -1,38 +1,61 @@
-const assets = [
-  'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Source+Sans+Pro:wght@400;600&display=swap',
-  'https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css',
-  'https://jsonplaceholder.typicode.com/todos/1'
-]
+workbox.core.setCacheNameDetails({
+	prefix: 'CovidTracker',
+	precahce: 'precache',
+	runtime: 'runtime'
+});
 
-self.addEventListener('install', event => {
-	event.waitUntil(
-		caches.open('dynamic-assets').then(cache => {
-			cache.addAll(assets);
-			console.log('caching shell assets');
-		})
-	);
-})
+workbox.routing.registerRoute(
+	({url}) => url.origin === 'https://fonts.googleapis.com',
+	workbox.strategies.cacheFirst({
+		cacheName: 'CovidTracker-google-fonts',
+		plugins:[
+			new workbox.cacheableResponse.Plugin({statuses:[0,200]}),
+			new workbox.expiration.Plugin({maxAgeSeconds: 60 * 60 * 24 * 30}),
+		]
+	})
+);
 
-self.addEventListener('fetch', event => {
-  if (event.request.url.indexOf('fonts.googleapis.com') === -1) {
-    event.respondWith(
-			caches.match(event.request)
-			.then(cacheRes => {
-				return cacheRes || fetch(event.request).then(fetchRes => {
-					return caches.open('dynamic-assets').then(cache => {
-
-						// cache.put(key, value)
-						cache.put(event.request.url, fetchRes.clone());
-						return fetchRes
-					})
-				});
+workbox.routing.registerRoute(
+	new RegExp('\.css$'),
+	workbox.strategies.cacheFirst({
+		cacheName: 'CovidTracker-cache-stylesheets',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxAgeSeconds: 60 * 60 * 24,
+				maxEntries: 30,
+				purgeOnQuotaError: true
 			})
-			.catch((error) => {
-        console.error('error gan', error);
+		]
+	})
+);
+
+workbox.routing.registerRoute(
+	new RegExp('\.js$'),
+	workbox.strategies.cacheFirst({
+		cacheName: 'CovidTracker-cache-scripts',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxAgeSeconds: 60 * 60 * 24,
+				maxEntries: 30,
+				purgeOnQuotaError: true
 			})
-		)
-  }
-})
+		]
+	})
+);
+
+workbox.routing.registerRoute(
+	new RegExp('\.[png|svg|jpg|jpeg]$'),
+	workbox.strategies.cacheFirst({
+		cacheName: 'CovidTracker-cache-images',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxAgeSeconds: 60 * 60 * 24,
+				maxEntries: 30,
+				purgeOnQuotaError: true
+			})
+		]
+	})
+);
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
