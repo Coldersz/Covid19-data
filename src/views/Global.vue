@@ -52,6 +52,7 @@
 import Chart from "@/components/Chart";
 import SData from "@/components/SkeletonData";
 import SChart from "@/components/SkeletonChart";
+import alertify from "alertifyjs";
 
 export default {
   components: {
@@ -113,6 +114,8 @@ export default {
         this.recovered = this.format(response.data.recovered.value);
         this.deaths = this.format(response.data.deaths.value);
       } catch (error) {
+        alertify.set('notifier','position', 'bottom-center');
+        alertify.error('Harap periksa jaringan anda');
         console.error(error);
       } finally {
         this.loadData = true;
@@ -129,6 +132,8 @@ export default {
           this.chartdata.labels[i] = response.data[i].reportDate;
         }
       } catch (error) {
+        alertify.set('notifier','position', 'bottom-center');
+        alertify.error('Harap periksa jaringan anda');
         console.error(error);
       } finally {
         this.loadChart = true;
