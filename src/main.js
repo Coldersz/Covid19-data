@@ -5,6 +5,8 @@ import router from './router'
 import Api from './services/api';
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
+import 'alertifyjs/build/css/alertify.min.css';
+import 'alertifyjs/build/css/themes/default.min.css';
 import './registerServiceWorker'
 
 Vue.use(Api);
