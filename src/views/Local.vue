@@ -82,6 +82,7 @@
 <script>
 import SData from '@/components/SkeletonData';
 import STable from '@/components/SkeletonTable';
+import alertify from "alertifyjs";
 
 export default {
   components: {
@@ -150,6 +151,8 @@ export default {
         this.recovered = response.data[0].sembuh;
         this.deaths = response.data[0].meninggal;
       } catch (error) {
+        alertify.set('notifier','position', 'bottom-center');
+        alertify.error('Harap periksa jaringan anda');
         console.error(error);
       } finally {
         this.waitData = false;
@@ -170,6 +173,8 @@ export default {
         }
         this.waitTable = true;
       } catch (error) {
+        alertify.set('notifier','position', 'bottom-center');
+        alertify.error('Harap periksa jaringan anda');
         console.error(error);
       } finally {
         this.waitTable = false;
